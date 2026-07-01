@@ -1,52 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth dark">
 <head>
-
-<script src="src="tailwind.min.js"></script>
-<script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        // Tumhari premium futuristic theme ke liye colors aur blur systems yahan config ho jayenge
-        colors: {
-          cyberCyan: '#00F2FE',
-          cyberBlue: '#4FACFE',
-          darkBg: '#0D1117',
-        },
-        backdropBlur: {
-          glass: '20px',
-        }
-      }
-    }
-  }
-</script>
-<style type="text/tailwindcss">
-  /* Agar tumne koi custom utility classes banayi hain toh yahan smoothly handle ho jayengi */
-  @layer utilities {
-    .glassmorphism {
-      background: rgba(13, 17, 23, 0.7);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(0, 242, 254, 0.2);
-    }
-  }
-</style>
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          clifford: '#da373d',
-        }
-      }
-    }
-  }
-</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Akshay Datarkar | UI/UX & Full-Stack Developer</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script src="tailwind.min.js"></script>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <script>
@@ -59,7 +19,15 @@
                         darkbg: '#000000',
                         cardbg: '#111111',
                         lightbg: '#ffffff',
-                        lightcard: '#f9f9f9'
+                        lightcard: '#f9f9f9',
+                        // Premium Futuristic Elements
+                        cyberCyan: '#00F2FE',
+                        cyberBlue: '#4FACFE',
+                        darkBg: '#0D1117',
+                        clifford: '#da373d'
+                    },
+                    backdropBlur: {
+                        glass: '20px',
                     },
                     animation: {
                         'spin-slow': 'spin 6s linear infinite',
@@ -82,15 +50,23 @@
         }
     </script>
 
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .glassmorphism {
+                background: rgba(13, 17, 23, 0.7);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                border: 1px solid rgba(0, 242, 254, 0.2);
+            }
+        }
+    </style>
+
     <style>
-       
         .lock-scroll { overflow: hidden; height: 100vh; }
 
-       
         #premium-loader {
             position: fixed; inset: 0; z-index: 9999;
             background-color: #050505;
-            
             background-image: 
                 linear-gradient(rgba(253, 111, 0, 0.05) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(253, 111, 0, 0.05) 1px, transparent 1px);
@@ -110,7 +86,6 @@
             transform: translateY(-100%);
         }
 
-       
         .loader-blob {
             position: absolute;
             width: 300px; height: 300px;
@@ -130,7 +105,6 @@
             align-items: center;
         }
 
-       
         .techie-text {
             font-size: clamp(2.5rem, 8vw, 6rem);
             font-weight: 900;
@@ -158,7 +132,6 @@
             0% { width: 0; }
             100% { width: 100%; border-right-color: transparent; }
         }
-
         
         .loader-bar-container {
             width: 250px;
@@ -200,7 +173,6 @@
             50% { opacity: 0.3; } 
         }
 
-        /* Main Content Fade In */
         .content-reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -211,7 +183,6 @@
             transform: translateY(0);
         }
 
-        /* Modal Transitions */
         #project-modal {
             opacity: 0;
             pointer-events: none;
@@ -229,7 +200,6 @@
             transform: scale(1) translateY(0);
         }
 
-        /* Custom Scrollbar for Modal Image */
         .custom-scrollbar::-webkit-scrollbar {
             width: 6px;
         }
@@ -255,6 +225,7 @@
             <div class="loader-subtitle">Web & UI/UX Developer</div>
         </div>
     </div>
+    
     <div id="main-content" class="content-reveal">
         
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center border-b border-zinc-100 dark:border-zinc-900 sticky top-0 z-50 bg-lightbg/80 dark:bg-darkbg/80 backdrop-blur-lg">
@@ -288,7 +259,6 @@
             </div>
             
             <div class="w-full md:w-1/2 flex justify-center relative">
-                
                 <svg class="absolute top-0 right-10 w-64 h-64 text-brand opacity-10 animate-spin-slow z-0" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="50" cy="50" r="48" stroke="currentColor" stroke-width="0.5" stroke-dasharray="5 5"/>
                     <circle cx="50" cy="50" r="38" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2 4"/>
@@ -334,7 +304,6 @@
 
         <section id="about" class="container mx-auto px-6 py-20 flex flex-col md:flex-row items-center gap-12">
             <div class="w-full md:w-5/12 flex justify-center relative">
-                
                 <div class="absolute -top-6 -left-6 w-32 h-32 bg-brand/20 rounded-full blur-2xl animate-pulse z-0"></div>
                 <div class="absolute -bottom-8 -right-8 w-32 h-32 opacity-20 z-0" style="background-image: radial-gradient(circle, #fd6f00 2px, transparent 2px); background-size: 15px 15px;"></div>
 
@@ -523,7 +492,7 @@
                                     <div class="w-12 h-12 rounded-full bg-white dark:bg-zinc-900 flex items-center justify-center text-brand border border-zinc-200 dark:border-zinc-800 shrink-0 shadow-sm"><i class="fa-solid fa-phone"></i></div>
                                     <div class="mt-1">
                                         <h4 class="text-xs font-bold text-zinc-400 uppercase tracking-wider mb-1">Phone</h4>
-                                        <a href="tel:+91xxxxxxxxxx" class="font-medium hover:text-brand transition-colors text-black dark:text-white">+91 8766867361</a>
+                                        <a href="tel:+918766867361" class="font-medium hover:text-brand transition-colors text-black dark:text-white">+91 8766867361</a>
                                     </div>
                                 </div>
                                 <div class="flex items-start space-x-4">
@@ -639,7 +608,6 @@
     </div>
 
     <script>
-       
         document.querySelectorAll('footer ul li a').forEach(link => {
             link.addEventListener('mouseenter', () => {
                 let icon = link.querySelector('i');
@@ -657,7 +625,6 @@
             });
         });
 
-      
         setTimeout(() => {
             const loader = document.getElementById('premium-loader');
             loader.classList.add('hide'); 
@@ -668,7 +635,6 @@
             setTimeout(() => { loader.style.display = 'none'; }, 1000);
         }, 2500);
 
-        // === THEME TOGGLE LOGIC ===
         const themeToggleBtn = document.getElementById('theme-toggle');
         const themeIcon = document.getElementById('theme-icon');
         const htmlElement = document.documentElement;
@@ -693,7 +659,6 @@
             }
         });
 
-       
         const modal = document.getElementById('project-modal');
         const modalTitle = document.getElementById('modal-title');
         const modalDesc = document.getElementById('modal-desc');

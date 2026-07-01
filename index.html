@@ -1,7 +1,38 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth dark">
 <head>
-   
+   <!-- ========================================== -->
+<!-- TAILWIND PLAY CDN HACK FOR INSTANT LOAD   -->
+<!-- ========================================== -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        // Tumhari premium futuristic theme ke liye colors aur blur systems yahan config ho jayenge
+        colors: {
+          cyberCyan: '#00F2FE',
+          cyberBlue: '#4FACFE',
+          darkBg: '#0D1117',
+        },
+        backdropBlur: {
+          glass: '20px',
+        }
+      }
+    }
+  }
+</script>
+<style type="text/tailwindcss">
+  /* Agar tumne koi custom utility classes banayi hain toh yahan smoothly handle ho jayengi */
+  @layer utilities {
+    .glassmorphism {
+      background: rgba(13, 17, 23, 0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(0, 242, 254, 0.2);
+    }
+  }
+</style>
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
   tailwind.config = {

@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth dark">
 <head>
-   <!-- ========================================== -->
-<!-- TAILWIND PLAY CDN HACK FOR INSTANT LOAD   -->
-<!-- ========================================== -->
+
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
   tailwind.config = {
@@ -85,16 +83,14 @@
     </script>
 
     <style>
-        /* Hide scrollbar during preloader */
+       
         .lock-scroll { overflow: hidden; height: 100vh; }
 
-        /* ========================================== */
-        /* ATTRACTIVE CYBERPUNK LOADER SCREEN */
-        /* ========================================== */
+       
         #premium-loader {
             position: fixed; inset: 0; z-index: 9999;
             background-color: #050505;
-            /* Animated Grid Background */
+            
             background-image: 
                 linear-gradient(rgba(253, 111, 0, 0.05) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(253, 111, 0, 0.05) 1px, transparent 1px);
@@ -114,7 +110,7 @@
             transform: translateY(-100%);
         }
 
-        /* Ambient Glowing Blobs */
+       
         .loader-blob {
             position: absolute;
             width: 300px; height: 300px;
@@ -134,7 +130,7 @@
             align-items: center;
         }
 
-        /* Cyberpunk Scan Reveal Text */
+       
         .techie-text {
             font-size: clamp(2.5rem, 8vw, 6rem);
             font-weight: 900;
@@ -163,7 +159,7 @@
             100% { width: 100%; border-right-color: transparent; }
         }
 
-        /* Sleek Loading Bar */
+        
         .loader-bar-container {
             width: 250px;
             height: 3px;
@@ -643,7 +639,7 @@
     </div>
 
     <script>
-        // Hover effect for footer links
+       
         document.querySelectorAll('footer ul li a').forEach(link => {
             link.addEventListener('mouseenter', () => {
                 let icon = link.querySelector('i');
@@ -661,7 +657,7 @@
             });
         });
 
-        // === PREMIUM LOADER LOGIC ===
+      
         setTimeout(() => {
             const loader = document.getElementById('premium-loader');
             loader.classList.add('hide'); 
@@ -697,7 +693,7 @@
             }
         });
 
-        // === MODAL POPUP LOGIC ===
+       
         const modal = document.getElementById('project-modal');
         const modalTitle = document.getElementById('modal-title');
         const modalDesc = document.getElementById('modal-desc');

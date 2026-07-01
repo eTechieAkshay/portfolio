@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+   
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          clifford: '#da373d',
+        }
+      }
+    }
+  }
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akshay Datarkar | UI/UX & Full-Stack Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: '#fd6f00', 
+                        darkbg: '#000000',
+                        cardbg: '#111111',
+                        lightbg: '#ffffff',
+                        lightcard: '#f9f9f9'
+                    },
+                    animation: {
+                        'spin-slow': 'spin 6s linear infinite',
+                        'pulse-glow': 'pulseGlow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'floatUpDown 4s ease-in-out infinite',
+                        'float-delay': 'floatUpDown 5s ease-in-out infinite 1.5s',
+                    },
+                    keyframes: {
+                        pulseGlow: {
+                            '0%, 100%': { opacity: 1, transform: 'scale(1)' },
+                            '50%': { opacity: .7, transform: 'scale(1.05)' },
+                        },
+                        floatUpDown: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-15px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Hide scrollbar during preloader */
+        .lock-scroll { overflow: hidden; height: 100vh; }
+
+        /* ========================================== */
+        /* ATTRACTIVE CYBERPUNK LOADER SCREEN */
+        /* ========================================== */
+        #premium-loader {
+            position: fixed; inset: 0; z-index: 9999;
+            background-color: #050505;
+            /* Animated Grid Background */
+            background-image: 
+                linear-gradient(rgba(253, 111, 0, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(253, 111, 0, 0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+            animation: gridMove 4s linear infinite;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+            overflow: hidden;
+        }
+
+        @keyframes gridMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 30px 30px; }
+        }
+
+        #premium-loader.hide {
+            transform: translateY(-100%);
+        }
+
+        /* Ambient Glowing Blobs */
+        .loader-blob {
+            position: absolute;
+            width: 300px; height: 300px;
+            background: #fd6f00;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.15;
+            z-index: 1;
+            animation: pulseGlow 3s infinite alternate;
+        }
+
+        .loader-content {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Cyberpunk Scan Reveal Text */
+        .techie-text {
+            font-size: clamp(2.5rem, 8vw, 6rem);
+            font-weight: 900;
+            letter-spacing: 0.15em;
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.15);
+            position: relative;
+            text-align: center;
+            white-space: nowrap;
+        }
+        
+        .techie-text::before {
+            content: 'TECHIE WORLD';
+            position: absolute;
+            left: 0; top: 0; width: 0; height: 100%;
+            color: #fd6f00;
+            -webkit-text-stroke: 0px transparent;
+            overflow: hidden;
+            border-right: 4px solid #fd6f00;
+            animation: scanReveal 2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            filter: drop-shadow(0 0 15px rgba(253, 111, 0, 0.6));
+        }
+
+        @keyframes scanReveal {
+            0% { width: 0; }
+            100% { width: 100%; border-right-color: transparent; }
+        }
+
+        /* Sleek Loading Bar */
+        .loader-bar-container {
+            width: 250px;
+            height: 3px;
+            background: rgba(255,255,255,0.05);
+            margin-top: 30px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+        
+        .loader-bar {
+            height: 100%;
+            background: #fd6f00;
+            width: 0%;
+            box-shadow: 0 0 15px #fd6f00;
+            animation: loadProgress 2.2s cubic-bezier(0.8, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes loadProgress {
+            0% { width: 0%; }
+            40% { width: 50%; }
+            80% { width: 80%; }
+            100% { width: 100%; }
+        }
+
+        .loader-subtitle {
+            margin-top: 15px;
+            font-size: 0.75rem;
+            letter-spacing: 0.4em;
+            color: #fd6f00;
+            font-weight: bold;
+            text-transform: uppercase;
+            animation: blinkText 1.5s linear infinite;
+        }
+
+        @keyframes blinkText { 
+            0%, 100% { opacity: 1; } 
+            50% { opacity: 0.3; } 
+        }
+
+        /* Main Content Fade In */
+        .content-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s cubic-bezier(0.77, 0, 0.175, 1) 0.5s;
+        }
+        .content-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Modal Transitions */
+        #project-modal {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease-out;
+        }
+        #project-modal.modal-active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        #modal-content-box {
+            transform: scale(0.95) translateY(20px);
+            transition: all 0.3s ease-out;
+        }
+        #project-modal.modal-active #modal-content-box {
+            transform: scale(1) translateY(0);
+        }
+
+        /* Custom Scrollbar for Modal Image */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #fd6f00; 
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="lock-scroll bg-lightbg text-black dark:bg-darkbg dark:text-white font-sans antialiased transition-colors duration-300">
+
+    <div id="premium-loader">
+        <div class="loader-blob" style="top: -10%; left: -10%;"></div>
+        <div class="loader-blob" style="bottom: -10%; right: -10%; animation-delay: 1.5s;"></div>
+        <div class="loader-content">
+            <h1 class="techie-text font-sans">TECHIE WORLD</h1>
+            <div class="loader-bar-container">
+                <div class="loader-bar"></div>
+            </div>
+            <div class="loader-subtitle">Web & UI/UX Developer</div>
+        </div>
+    </div>
+    <div id="main-content" class="content-reveal">
+        
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center border-b border-zinc-100 dark:border-zinc-900 sticky top-0 z-50 bg-lightbg/80 dark:bg-darkbg/80 backdrop-blur-lg">
+            <div class="text-2xl font-bold tracking-tight">
+                <span class="text-brand">A</span>kshay.
+            </div>
+            <div class="hidden md:flex space-x-8 text-sm font-medium items-center uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+                <a href="#about" class="hover:text-brand transition-colors">About</a>
+                <a href="#services" class="hover:text-brand transition-colors">Services</a>
+                <a href="#projects" class="hover:text-brand transition-colors">Projects</a>
+                <a href="#contact" class="hover:text-brand transition-colors">Contact</a>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <button id="theme-toggle" class="p-2 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:text-brand transition-all focus:outline-none" aria-label="Toggle Theme">
+                    <i id="theme-icon" class="fa-solid fa-moon text-lg"></i>
+                </button>
+                <a href="AKSHAY_DATARKAR_Resume.pdf" download="Akshay_Datarkar_Resume.pdf" class="hidden md:inline-block border border-brand text-brand hover:bg-brand hover:text-white px-6 py-2 rounded-full font-medium transition-all">Download CV</a>
+            </div>
+        </nav>
+
+        <section id="home" class="container mx-auto px-6 py-24 flex flex-col-reverse md:flex-row items-center gap-12 relative overflow-hidden">
+            <div class="w-full md:w-1/2 mt-10 md:mt-0 z-10 text-center md:text-left">
+                <p class="text-xl font-semibold mb-2 tracking-wide text-zinc-600 dark:text-zinc-400">Hello world I am</p>
+                <h2 class="text-brand text-2xl font-bold mb-2">Akshay Datarkar</h2>
+                <h1 class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight tracking-tight">WEB & UI/UX <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-brand to-orange-400">Developer</span></h1>
+                <p class="text-zinc-600 dark:text-zinc-400 mb-8 max-w-lg leading-relaxed mx-auto md:mx-0">
+                    Highly analytical Master of Computer Applications student and versatile Full-Stack Developer blending algorithmic logic with stunning visual aesthetics.
+                </p>
+                <a href="#contact" class="bg-brand hover:bg-orange-600 text-white px-8 py-3 rounded-md font-bold transition-all shadow-lg shadow-brand/30 hover:shadow-brand/50">Hire Me</a>
+            </div>
+            
+            <div class="w-full md:w-1/2 flex justify-center relative">
+                
+                <svg class="absolute top-0 right-10 w-64 h-64 text-brand opacity-10 animate-spin-slow z-0" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="48" stroke="currentColor" stroke-width="0.5" stroke-dasharray="5 5"/>
+                    <circle cx="50" cy="50" r="38" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2 4"/>
+                </svg>
+                <div class="absolute top-0 -left-4 w-72 h-72 bg-brand opacity-30 dark:opacity-20 rounded-full filter blur-3xl animate-blob z-0"></div>
+                <div class="absolute -bottom-8 right-4 w-72 h-72 bg-orange-300 opacity-20 dark:opacity-10 rounded-full filter blur-3xl animate-blob z-0" style="animation-delay: 2s;"></div>
+                
+                <div class="relative w-80 h-80 md:w-96 md:h-96 flex items-center justify-center z-10">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-brand to-orange-300 rounded-full opacity-10 dark:opacity-20 animate-pulse"></div>
+                    <div class="absolute w-[90%] h-[90%] bg-brand/80 rounded-full transform translate-x-4 translate-y-2 opacity-90 -z-10 shadow-xl"></div>
+                    <div class="absolute w-[40%] h-[40%] bg-orange-200 dark:bg-zinc-800 rounded-full -left-6 bottom-4 -z-10 shadow-md"></div>
+                    
+                    <div class="w-[85%] h-[85%] bg-zinc-200 dark:bg-zinc-900 rounded-full border-4 border-white dark:border-zinc-800 flex items-center justify-center text-zinc-400 overflow-hidden shadow-2xl relative group z-10">
+                        <img src="https://i.ibb.co/1JYgjhFM/me.png" alt="Akshay Datarkar" class="object-cover w-full h-full object-top group-hover:scale-110 transition-transform duration-500">
+                    </div>
+
+                    <div class="absolute -bottom-4 flex space-x-3 bg-white dark:bg-zinc-900 px-6 py-3 rounded-full shadow-xl border border-zinc-100 dark:border-zinc-800 z-20">
+                        <a href="https://www.linkedin.com/in/akshay-datarkar-6705053ab" target="_blank" class="text-zinc-500 hover:text-brand text-xl transition-colors"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/eTechieAkshay" target="_blank" class="text-zinc-500 hover:text-brand text-xl transition-colors"><i class="fab fa-github"></i></a>
+                        <a href="YOUR_TWITTER_URL" target="_blank" class="text-zinc-500 hover:text-brand text-xl transition-colors"><i class="fab fa-twitter"></i></a>
+                        <a href="YOUR_INSTAGRAM_URL" target="_blank" class="text-zinc-500 hover:text-brand text-xl transition-colors"><i class="fab fa-instagram"></i></a>
+                    </div>
+
+                    <div class="absolute top-8 left-0 md:-left-12 bg-white dark:bg-zinc-900 py-2 px-4 rounded-full shadow-2xl animate-float border border-zinc-100 dark:border-zinc-800 z-30 flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-orange-100 dark:bg-brand/20 flex items-center justify-center text-brand text-lg">
+                            <i class="fa-solid fa-handshake"></i>
+                        </div>
+                        <div class="text-left pr-2">
+                            <p class="text-[10px] text-zinc-500 font-bold uppercase tracking-wider m-0 leading-none mb-1">Happy Clients</p>
+                            <p class="text-xl font-black text-black dark:text-white m-0 leading-none">350<span class="text-brand">+</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="absolute top-12 right-4 md:-right-4 bg-white dark:bg-zinc-900 p-4 rounded-2xl shadow-xl animate-float border border-zinc-100 dark:border-zinc-800 z-20 hidden md:block">
+                    <i class="fab fa-java text-4xl text-red-500 drop-shadow-md"></i>
+                </div>
+                <div class="absolute bottom-20 right-4 md:-right-8 bg-white dark:bg-zinc-900 p-4 rounded-2xl shadow-xl animate-float-delay border border-zinc-100 dark:border-zinc-800 z-20 hidden md:block">
+                    <i class="fa-brands fa-figma text-4xl text-purple-500 drop-shadow-md"></i>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="container mx-auto px-6 py-20 flex flex-col md:flex-row items-center gap-12">
+            <div class="w-full md:w-5/12 flex justify-center relative">
+                
+                <div class="absolute -top-6 -left-6 w-32 h-32 bg-brand/20 rounded-full blur-2xl animate-pulse z-0"></div>
+                <div class="absolute -bottom-8 -right-8 w-32 h-32 opacity-20 z-0" style="background-image: radial-gradient(circle, #fd6f00 2px, transparent 2px); background-size: 15px 15px;"></div>
+
+                <div class="w-72 h-72 bg-zinc-100 dark:bg-zinc-900 rounded-full border-4 border-zinc-200 dark:border-zinc-800 flex items-center justify-center overflow-hidden shadow-inner group relative z-10">
+                     <img src="https://i.ibb.co/DHns3PV0/me.jpg" alt="About Akshay" class="object-cover w-full h-full object-top group-hover:scale-110 transition-transform duration-500">
+                </div>
+
+                <div class="absolute top-4 -left-4 bg-white dark:bg-zinc-900 p-3 rounded-full shadow-lg animate-float-delay border border-zinc-100 dark:border-zinc-800 z-20 hidden md:flex items-center justify-center">
+                    <i class="fab fa-react text-3xl text-cyan-400 drop-shadow-md"></i>
+                </div>
+                <div class="absolute bottom-10 -right-2 bg-white dark:bg-zinc-900 p-3 rounded-full shadow-lg animate-float border border-zinc-100 dark:border-zinc-800 z-20 hidden md:flex items-center justify-center">
+                    <i class="fa-solid fa-code text-2xl text-brand drop-shadow-md"></i>
+                </div>
+            </div>
+            
+            <div class="w-full md:w-7/12 z-10">
+                <h2 class="text-4xl font-bold mb-6">About Me</h2>
+                <p class="text-zinc-600 dark:text-zinc-400 mb-8 leading-relaxed">
+                    I am a passionate software engineer based in Wardha, Maharashtra. Newly credentialed as a Microsoft Certified Azure AI Fundamentals professional, I specialize in building robust applications using Advanced Java, PHP, and modern web frameworks like Tailwind CSS. My goal is to merge strong algorithmic logic with stunning visual aesthetics.
+                </p>
+                
+                <h3 class="text-sm font-bold tracking-widest text-zinc-400 uppercase mb-4">Tech Skills</h3>
+                <div class="flex flex-wrap gap-4 text-3xl">
+                    <div class="w-14 h-14 rounded-xl bg-white dark:bg-zinc-900 flex items-center justify-center text-orange-500 shadow-sm border border-zinc-100 dark:border-zinc-800 hover:-translate-y-2 transition-transform cursor-pointer"><i class="fab fa-html5"></i></div>
+                    <div class="w-14 h-14 rounded-xl bg-white dark:bg-zinc-900 flex items-center justify-center text-blue-500 shadow-sm border border-zinc-100 dark:border-zinc-800 hover:-translate-y-2 transition-transform cursor-pointer"><i class="fab fa-css3-alt"></i></div>
+                    <div class="w-14 h-14 rounded-xl bg-white dark:bg-zinc-900 flex items-center justify-center text-red-500 shadow-sm border border-zinc-100 dark:border-zinc-800 hover:-translate-y-2 transition-transform cursor-pointer"><i class="fab fa-java"></i></div>
+                    <div class="w-14 h-14 rounded-xl bg-white dark:bg-zinc-900 flex items-center justify-center text-indigo-400 shadow-sm border border-zinc-100 dark:border-zinc-800 hover:-translate-y-2 transition-transform cursor-pointer"><i class="fab fa-php"></i></div>
+                    <div class="w-14 h-14 rounded-xl bg-white dark:bg-zinc-900 flex items-center justify-center text-green-500 shadow-sm border border-zinc-100 dark:border-zinc-800 hover:-translate-y-2 transition-transform cursor-pointer"><i class="fa-solid fa-database"></i></div>
+                    <div class="w-14 h-14 rounded-xl bg-white dark:bg-zinc-900 flex items-center justify-center text-green-400 shadow-sm border border-zinc-100 dark:border-zinc-800 hover:-translate-y-2 transition-transform cursor-pointer"><i class="fab fa-android"></i></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="container mx-auto px-6 py-20 text-center">
+            <h2 class="text-4xl font-bold mb-4">Services</h2>
+            <p class="text-zinc-500 dark:text-zinc-400 max-w-2xl mx-auto mb-12">Leveraging cross-domain expertise to deliver scalable applications and precision-driven visual identities.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div class="bg-lightcard dark:bg-cardbg p-8 rounded-xl hover:shadow-xl dark:hover:shadow-[0_0_20px_rgba(253,111,0,0.15)] transition-all text-left border border-zinc-100 dark:border-zinc-900 hover:border-brand dark:hover:border-brand group">
+                    <i class="fa-solid fa-layer-group text-4xl text-brand mb-4 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="text-xl font-bold mb-2">UI/UX Design</h3>
+                    <p class="text-sm text-zinc-500 dark:text-zinc-400">Constructing visual asset structures and minimalist alignment parameters for enterprise clients like ALPHAA Services.</p>
+                </div>
+                <div class="bg-lightcard dark:bg-cardbg p-8 rounded-xl hover:shadow-xl dark:hover:shadow-[0_0_20px_rgba(253,111,0,0.15)] transition-all text-left border border-zinc-100 dark:border-zinc-900 hover:border-brand dark:hover:border-brand group">
+                    <i class="fa-solid fa-code text-4xl text-brand mb-4 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="text-xl font-bold mb-2">Web Development</h3>
+                    <p class="text-sm text-zinc-500 dark:text-zinc-400">Engineered full application infrastructure utilizing Java and responsive Tailwind CSS frameworks.</p>
+                </div>
+                <div class="bg-lightcard dark:bg-cardbg p-8 rounded-xl hover:shadow-xl dark:hover:shadow-[0_0_20px_rgba(253,111,0,0.15)] transition-all text-left border border-zinc-100 dark:border-zinc-900 hover:border-brand dark:hover:border-brand group">
+                    <i class="fa-solid fa-mobile-screen-button text-4xl text-brand mb-4 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="text-xl font-bold mb-2">App Design</h3>
+                    <p class="text-sm text-zinc-500 dark:text-zinc-400">Developing robust multi-lingual systems and cross-platform user settings management via Android Studio.</p>
+                </div>
+                <div class="bg-lightcard dark:bg-cardbg p-8 rounded-xl hover:shadow-xl dark:hover:shadow-[0_0_20px_rgba(253,111,0,0.15)] transition-all text-left border border-zinc-100 dark:border-zinc-900 hover:border-brand dark:hover:border-brand group">
+                    <i class="fa-solid fa-bullhorn text-4xl text-brand mb-4 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="text-xl font-bold mb-2">Digital Marketing</h3>
+                    <p class="text-sm text-zinc-500 dark:text-zinc-400">Optimizing public outreach analytics and targeted visual communication workflows for institutions like RAICSIT.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="container mx-auto px-6 py-20">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Featured Work</h2>
+                <p class="text-zinc-500 dark:text-zinc-400 max-w-2xl mx-auto">A showcase of advanced web platforms, AI integration, and high-fidelity digital infrastructure.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-lightcard dark:bg-cardbg rounded-2xl overflow-hidden border border-zinc-100 dark:border-zinc-900 group hover:border-brand transition-colors">
+                    <div class="h-60 w-full relative overflow-hidden bg-zinc-200 dark:bg-zinc-800">
+                        <img src="https://i.ibb.co/gFwWR3H8/Cofee.png" class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <button onclick="openModal('Cafe Website', 'Engineered full application infrastructure in PHP,HTML utilizing Android Studio. Integrated responsive multi-lingual UI translation systems with Tailwind CSS. Architected backend relational database schema optimizing transactional constraints for high-frequency linguistic queries and cross-platform user settings management.', 'https://i.ibb.co/gFwWR3H8/Cofee.png', 'Web & App')" class="bg-brand text-white px-6 py-2 rounded-full font-bold transform translate-y-4 group-hover:translate-y-0 transition-transform">View Project</button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-brand text-xs font-bold tracking-wider uppercase mb-2 block">Web & App</span>
+                        <h3 class="text-xl font-bold mb-2">Cafe Website</h3>
+                        <p class="text-zinc-500 dark:text-zinc-400 text-sm">Full-Stack infrastructure in PHP, HTML & Tailwind CSS with optimized databases.</p>
+                    </div>
+                </div>
+
+                <div class="bg-lightcard dark:bg-cardbg rounded-2xl overflow-hidden border border-zinc-100 dark:border-zinc-900 group hover:border-brand transition-colors">
+                    <div class="h-60 w-full relative overflow-hidden bg-zinc-200 dark:bg-zinc-800">
+                        <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?q=80&w=600&auto=format&fit=crop" class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <button onclick="openModal('Digital Persona Matrix', 'Deployed high-definition streaming matrices via customized OBS Studio processing pipelines. Automated resource optimization scripts resulting in stable performance metrics. Utilized Deep Generative AI visual models to restore, enhance, and upscale legacy physical asset captures into high-fidelity modern digital formats.', 'https://images.unsplash.com/photo-1555949963-aa79dcee981c?q=80&w=600&auto=format&fit=crop', 'AI & Streaming')" class="bg-brand text-white px-6 py-2 rounded-full font-bold transform translate-y-4 group-hover:translate-y-0 transition-transform">View Project</button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-brand text-xs font-bold tracking-wider uppercase mb-2 block">AI & Streaming</span>
+                        <h3 class="text-xl font-bold mb-2">Digital Persona Matrix</h3>
+                        <p class="text-zinc-500 dark:text-zinc-400 text-sm">Deployed streaming matrices and Deep Generative AI models for physical assets.</p>
+                    </div>
+                </div>
+
+                <div class="bg-lightcard dark:bg-cardbg rounded-2xl overflow-hidden border border-zinc-100 dark:border-zinc-900 group hover:border-brand transition-colors">
+                    <div class="h-60 w-full relative overflow-hidden bg-zinc-200 dark:bg-zinc-800">
+                        <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=600&auto=format&fit=crop" class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <button onclick="openModal('ALPHAA Services Assets', 'Constructed visual asset structures and scalable structural logos with precise minimalist alignment parameters for various enterprise clients. Designed high-conversion UI layouts prioritizing user journey and brand consistency.', 'https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=600&auto=format&fit=crop', 'Branding & UI')" class="bg-brand text-white px-6 py-2 rounded-full font-bold transform translate-y-4 group-hover:translate-y-0 transition-transform">View Project</button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-brand text-xs font-bold tracking-wider uppercase mb-2 block">Branding & UI</span>
+                        <h3 class="text-xl font-bold mb-2">ALPHAA Services Assets</h3>
+                        <p class="text-zinc-500 dark:text-zinc-400 text-sm">Constructed scalable structural logos with precise minimalist alignment.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="reviews" class="container mx-auto px-6 py-20">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Client Reviews</h2>
+                <p class="text-zinc-500 dark:text-zinc-400 max-w-2xl mx-auto">See what people are saying about my work, dedication, and the value I bring to their projects.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+                <div class="bg-lightcard dark:bg-cardbg p-8 rounded-2xl border border-zinc-100 dark:border-zinc-900 shadow-sm hover:shadow-xl hover:border-brand transition-all relative overflow-hidden">
+                    <i class="fa-solid fa-quote-right text-6xl text-brand opacity-10 absolute top-4 right-4"></i>
+                    <div class="flex text-brand text-sm mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-zinc-600 dark:text-zinc-400 mb-8 italic">"Akshay is an exceptional developer. He completely transformed our digital presence with his clean code and stunning UI design. Highly recommended for any complex web project!"</p>
+                    <div class="flex items-center gap-4 mt-auto">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=100&auto=format&fit=crop" class="w-12 h-12 rounded-full object-cover border-2 border-brand" alt="Rahul Sharma">
+                        <div>
+                            <h4 class="font-bold text-black dark:text-white text-sm">Rahul Sharma</h4>
+                            <span class="text-xs text-brand uppercase tracking-wider font-semibold">CEO, TechNova</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-lightcard dark:bg-cardbg p-8 rounded-2xl border border-zinc-100 dark:border-zinc-900 shadow-sm hover:shadow-xl hover:border-brand transition-all relative overflow-hidden">
+                    <i class="fa-solid fa-quote-right text-6xl text-brand opacity-10 absolute top-4 right-4"></i>
+                    <div class="flex text-brand text-sm mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-zinc-600 dark:text-zinc-400 mb-8 italic">"Working with Akshay was a breeze. He easily understood our requirements for the LUXORA platform and delivered a flawless app interface way ahead of the deadline."</p>
+                    <div class="flex items-center gap-4 mt-auto">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=100&auto=format&fit=crop" class="w-12 h-12 rounded-full object-cover border-2 border-brand" alt="Vikram Singh">
+                        <div>
+                            <h4 class="font-bold text-black dark:text-white text-sm">Vikram Singh</h4>
+                            <span class="text-xs text-brand uppercase tracking-wider font-semibold">Founder, LUXORA</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-lightcard dark:bg-cardbg p-8 rounded-2xl border border-zinc-100 dark:border-zinc-900 shadow-sm hover:shadow-xl hover:border-brand transition-all relative overflow-hidden">
+                    <i class="fa-solid fa-quote-right text-6xl text-brand opacity-10 absolute top-4 right-4"></i>
+                    <div class="flex text-brand text-sm mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-zinc-600 dark:text-zinc-400 mb-8 italic">"His expertise in UI/UX and branding is unmatched. The assets he created for ALPHAA Services significantly boosted our engagement. He is a very creative professional."</p>
+                    <div class="flex items-center gap-4 mt-auto">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=100&auto=format&fit=crop" class="w-12 h-12 rounded-full object-cover border-2 border-brand" alt="Priya Desai">
+                        <div>
+                            <h4 class="font-bold text-black dark:text-white text-sm">Priya Desai</h4>
+                            <span class="text-xs text-brand uppercase tracking-wider font-semibold">Marketing Head</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="container mx-auto px-6 py-20">
+            <div class="bg-white dark:bg-cardbg rounded-3xl shadow-xl overflow-hidden border border-zinc-100 dark:border-zinc-900 relative">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-brand opacity-5 blur-[100px] rounded-full"></div>
+
+                <div class="flex flex-col md:flex-row relative z-10">
+                    <div class="w-full md:w-5/12 bg-zinc-50 dark:bg-[#0a0a0a] p-10 md:p-14 border-r border-zinc-100 dark:border-zinc-900 flex flex-col justify-between">
+                        <div>
+                            <h2 class="text-3xl font-bold mb-4">Let's Discuss Your Project</h2>
+                            <p class="text-zinc-500 dark:text-zinc-400 mb-10 leading-relaxed">Looking for a Software Engineering Intern or freelance technical consultant? Drop a message and let's build something amazing together.</p>
+                            
+                            <div class="space-y-8">
+                                <div class="flex items-start space-x-4">
+                                    <div class="w-12 h-12 rounded-full bg-white dark:bg-zinc-900 flex items-center justify-center text-brand border border-zinc-200 dark:border-zinc-800 shrink-0 shadow-sm"><i class="fa-solid fa-envelope"></i></div>
+                                    <div class="mt-1">
+                                        <h4 class="text-xs font-bold text-zinc-400 uppercase tracking-wider mb-1">Email</h4>
+                                        <a href="mailto:datarkarakshay99@gmail.com" class="font-medium hover:text-brand transition-colors text-black dark:text-white">datarkarakshay99@gmail.com</a>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-4">
+                                    <div class="w-12 h-12 rounded-full bg-white dark:bg-zinc-900 flex items-center justify-center text-brand border border-zinc-200 dark:border-zinc-800 shrink-0 shadow-sm"><i class="fa-solid fa-phone"></i></div>
+                                    <div class="mt-1">
+                                        <h4 class="text-xs font-bold text-zinc-400 uppercase tracking-wider mb-1">Phone</h4>
+                                        <a href="tel:+918766867361" class="font-medium hover:text-brand transition-colors text-black dark:text-white">+91 8766867361</a>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-4">
+                                    <div class="w-12 h-12 rounded-full bg-white dark:bg-zinc-900 flex items-center justify-center text-brand border border-zinc-200 dark:border-zinc-800 shrink-0 shadow-sm"><i class="fa-solid fa-location-dot"></i></div>
+                                    <div class="mt-1">
+                                        <h4 class="text-xs font-bold text-zinc-400 uppercase tracking-wider mb-1">Location</h4>
+                                        <p class="font-medium text-black dark:text-white">Wardha, Maharashtra, India</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="w-full md:w-7/12 p-10 md:p-14">
+                        <form class="space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-semibold text-zinc-600 dark:text-zinc-400 mb-2">Your Name</label>
+                                    <input type="text" placeholder="John Doe" class="w-full bg-zinc-50 dark:bg-zinc-900 text-black dark:text-white px-5 py-3 rounded-xl border border-zinc-200 dark:border-zinc-800 focus:outline-none focus:ring-2 focus:ring-brand/50 focus:border-brand transition-all">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-zinc-600 dark:text-zinc-400 mb-2">Your Email</label>
+                                    <input type="email" placeholder="john@example.com" class="w-full bg-zinc-50 dark:bg-zinc-900 text-black dark:text-white px-5 py-3 rounded-xl border border-zinc-200 dark:border-zinc-800 focus:outline-none focus:ring-2 focus:ring-brand/50 focus:border-brand transition-all">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-zinc-600 dark:text-zinc-400 mb-2">Subject</label>
+                                <input type="text" placeholder="Project Inquiry" class="w-full bg-zinc-50 dark:bg-zinc-900 text-black dark:text-white px-5 py-3 rounded-xl border border-zinc-200 dark:border-zinc-800 focus:outline-none focus:ring-2 focus:ring-brand/50 focus:border-brand transition-all">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-zinc-600 dark:text-zinc-400 mb-2">Message</label>
+                                <textarea rows="4" placeholder="Tell me about your project..." class="w-full bg-zinc-50 dark:bg-zinc-900 text-black dark:text-white px-5 py-3 rounded-xl border border-zinc-200 dark:border-zinc-800 focus:outline-none focus:ring-2 focus:ring-brand/50 focus:border-brand transition-all resize-none"></textarea>
+                            </div>
+                            <button type="submit" class="bg-brand hover:bg-orange-600 text-white px-8 py-4 rounded-xl font-bold transition-all w-full shadow-lg shadow-brand/20 hover:shadow-brand/40 flex items-center justify-center gap-3 group">
+                                Send Message <i class="fa-solid fa-paper-plane group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="bg-zinc-100 dark:bg-[#050505] pt-20 pb-8 border-t border-zinc-200 dark:border-zinc-900 relative overflow-hidden">
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[1px] bg-gradient-to-r from-transparent via-brand to-transparent opacity-50"></div>
+            
+            <div class="container mx-auto px-6">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                    <div class="md:col-span-2">
+                        <div class="text-4xl font-black text-black dark:text-white mb-6 tracking-tight">
+                            <span class="text-brand">A</span>kshay.
+                        </div>
+                        <p class="text-zinc-500 dark:text-zinc-400 leading-relaxed mb-8 max-w-sm">
+                            Crafting scalable digital infrastructure and stunning visual interfaces. Always ready for the next challenge in web and app development.
+                        </p>
+                        <div class="flex space-x-4">
+                            <a href="https://www.linkedin.com/in/akshay-datarkar-6705053ab" target="_blank" class="w-12 h-12 rounded-full bg-white dark:bg-zinc-900 flex items-center justify-center text-zinc-500 hover:text-brand hover:-translate-y-1 hover:shadow-lg transition-all border border-zinc-200 dark:border-zinc-800"><i class="fab fa-linkedin-in text-lg"></i></a>
+                            <a href="https://github.com/eTechieAkshay" target="_blank" class="w-12 h-12 rounded-full bg-white dark:bg-zinc-900 flex items-center justify-center text-zinc-500 hover:text-brand hover:-translate-y-1 hover:shadow-lg transition-all border border-zinc-200 dark:border-zinc-800"><i class="fab fa-github text-lg"></i></a>
+                            <a href="YOUR_TWITTER_URL" target="_blank" class="w-12 h-12 rounded-full bg-white dark:bg-zinc-900 flex items-center justify-center text-zinc-500 hover:text-brand hover:-translate-y-1 hover:shadow-lg transition-all border border-zinc-200 dark:border-zinc-800"><i class="fab fa-twitter text-lg"></i></a>
+                            <a href="YOUR_INSTAGRAM_URL" target="_blank" class="w-12 h-12 rounded-full bg-white dark:bg-zinc-900 flex items-center justify-center text-zinc-500 hover:text-brand hover:-translate-y-1 hover:shadow-lg transition-all border border-zinc-200 dark:border-zinc-800"><i class="fab fa-instagram text-lg"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-lg font-bold text-black dark:text-white mb-6 uppercase tracking-wider text-sm">Quick Links</h4>
+                        <ul class="space-y-4 text-zinc-500 dark:text-zinc-400">
+                            <li><a href="#home" class="hover:text-brand transition-colors flex items-center gap-2 font-medium"><i class="fa-solid fa-arrow-right text-brand text-xs opacity-0 -ml-4 transition-all"></i> Home</a></li>
+                            <li><a href="#about" class="hover:text-brand transition-colors flex items-center gap-2 font-medium"><i class="fa-solid fa-arrow-right text-brand text-xs opacity-0 -ml-4 transition-all"></i> About</a></li>
+                            <li><a href="#services" class="hover:text-brand transition-colors flex items-center gap-2 font-medium"><i class="fa-solid fa-arrow-right text-brand text-xs opacity-0 -ml-4 transition-all"></i> Services</a></li>
+                            <li><a href="#projects" class="hover:text-brand transition-colors flex items-center gap-2 font-medium"><i class="fa-solid fa-arrow-right text-brand text-xs opacity-0 -ml-4 transition-all"></i> Projects</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-lg font-bold text-black dark:text-white mb-6 uppercase tracking-wider text-sm">Specialization</h4>
+                        <ul class="space-y-4 text-zinc-500 dark:text-zinc-400">
+                            <li class="font-medium">UI/UX Design</li>
+                            <li class="font-medium">Full-Stack Development</li>
+                            <li class="font-medium">App Architecture</li>
+                            <li class="font-medium">Cloud & AI Systems</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="pt-8 border-t border-zinc-200 dark:border-zinc-900 flex flex-col md:flex-row justify-between items-center gap-4">
+                    <p class="text-sm text-zinc-500 font-medium">
+                        © 2026 Akshay Datarkar. All Rights Reserved.
+                    </p>
+                    <div class="flex space-x-6 text-sm font-medium text-zinc-500">
+                        <a href="#" class="hover:text-brand transition-colors">Privacy Policy</a>
+                        <a href="#" class="hover:text-brand transition-colors">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <div id="project-modal" class="fixed inset-0 z-[1000] flex items-center justify-center p-4 sm:p-6">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal()"></div>
+        <div id="modal-content-box" class="relative w-full max-w-4xl bg-white dark:bg-cardbg rounded-2xl overflow-hidden shadow-2xl border border-zinc-200 dark:border-zinc-800 flex flex-col md:flex-row max-h-[90vh]">
+            <button onclick="closeModal()" class="absolute top-4 right-4 z-10 w-10 h-10 bg-black/50 text-white rounded-full flex items-center justify-center hover:bg-brand transition-colors">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="w-full md:w-1/2 h-64 md:h-auto max-h-[50vh] md:max-h-[90vh] bg-zinc-200 dark:bg-zinc-800 overflow-y-auto custom-scrollbar">
+                <img id="modal-img" src="" alt="Project Image" class="w-full h-auto">
+            </div>
+            <div class="w-full md:w-1/2 p-8 overflow-y-auto">
+                <span id="modal-category" class="text-brand text-xs font-bold tracking-wider uppercase mb-2 block">Category</span>
+                <h2 id="modal-title" class="text-3xl font-bold mb-6 text-black dark:text-white">Project Title</h2>
+                <h4 class="text-sm font-semibold text-zinc-500 uppercase tracking-widest mb-3 border-b border-zinc-200 dark:border-zinc-800 pb-2">About Project</h4>
+                <p id="modal-desc" class="text-zinc-600 dark:text-zinc-400 leading-relaxed mb-8">Project description...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Hover effect for footer links
+        document.querySelectorAll('footer ul li a').forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                let icon = link.querySelector('i');
+                if(icon) {
+                    icon.style.opacity = '1';
+                    icon.style.marginLeft = '0';
+                }
+            });
+            link.addEventListener('mouseleave', () => {
+                let icon = link.querySelector('i');
+                if(icon) {
+                    icon.style.opacity = '0';
+                    icon.style.marginLeft = '-1rem';
+                }
+            });
+        });
+
+        // === PREMIUM LOADER LOGIC ===
+        setTimeout(() => {
+            const loader = document.getElementById('premium-loader');
+            loader.classList.add('hide'); 
+            
+            document.body.classList.remove('lock-scroll');
+            document.getElementById('main-content').classList.add('active');
+            
+            setTimeout(() => { loader.style.display = 'none'; }, 1000);
+        }, 2500);
+
+        // === THEME TOGGLE LOGIC ===
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const htmlElement = document.documentElement;
+
+        if (localStorage.getItem('theme') === 'light') {
+            htmlElement.classList.remove('dark');
+            themeIcon.classList.replace('fa-moon', 'fa-sun');
+        } else {
+            htmlElement.classList.add('dark');
+            themeIcon.classList.replace('fa-sun', 'fa-moon');
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+            } else {
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                themeIcon.classList.replace('fa-sun', 'fa-moon');
+            }
+        });
+
+        // === MODAL POPUP LOGIC ===
+        const modal = document.getElementById('project-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDesc = document.getElementById('modal-desc');
+        const modalImg = document.getElementById('modal-img');
+        const modalCategory = document.getElementById('modal-category');
+
+        function openModal(title, desc, imgSrc, category) {
+            modalTitle.innerText = title;
+            modalDesc.innerText = desc;
+            modalImg.src = imgSrc;
+            modalCategory.innerText = category;
+            
+            modal.classList.add('modal-active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal.classList.remove('modal-active');
+            document.body.style.overflow = '';
+        }
+    </script>
+</body>
+</html>
